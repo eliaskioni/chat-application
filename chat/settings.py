@@ -82,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'chat',
-        'USER': 'root',
-        'PASSWORD': 'root',
+        'USER': 'kioni',
+        'PASSWORD': 'kioni',
         'OPTIONS': {
         }
     }
