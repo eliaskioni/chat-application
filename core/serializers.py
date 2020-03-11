@@ -9,7 +9,10 @@ from rest_framework.serializers import ModelSerializer, CharField
 def send_sms_to_partner(phone_number, text):
     import requests
 
-    url = "http://34.252.86.123:8006/api"
+    is_airtel = True
+    url = 'http://tigorw.inclusivity-aspin.com:8006/api'\
+        if is_airtel else \
+        "http://34.252.86.123:8006/api"
     payload = {
         "request_id": str(uuid.uuid4()),
         "system_generated": "false",
@@ -17,15 +20,13 @@ def send_sms_to_partner(phone_number, text):
         "request_type": "sms",
         "customer_id": phone_number,
         "text": text,
-        "partner_guid": "equityguid",
+        "partner_guid": 'tigorwandaguid' if is_airtel else "equityguid",
         "chat_message": True
     }
     headers = {
         'content-type': "application/json",
-        'authorization': "CdD8KcU6u3J&BDiT",
-        'session': "James",
-        'cache-control': "no-cache",
-        'postman-token': "74e3a84f-272d-f98c-b16c-3d374aabf388"
+        'authorization': 'api-key' if is_airtel else "CdD8KcU6u3J&BDiT",
+        'session': "James"
     }
 
     response = requests.request("POST", url, json=payload, headers=headers)

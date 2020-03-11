@@ -126,12 +126,6 @@ REST_FRAMEWORK = {
 MESSAGES_TO_LOAD = 15
 
 # In settings.py
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "core.routing.channel_routing",
-    },
-}
 # Could be changed to the config below to scale:
 # "BACKEND": "asgi_redis.RedisChannelLayer",
 # "CONFIG": {
