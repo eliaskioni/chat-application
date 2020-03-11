@@ -9,7 +9,7 @@ from rest_framework.serializers import ModelSerializer, CharField
 def send_sms_to_partner(phone_number, text):
     import requests
 
-    is_airtel = True
+    is_airtel = str(phone_number).startswith('00250')
     url = 'http://tigorw.inclusivity-aspin.com:8006/api'\
         if is_airtel else \
         "http://34.252.86.123:8006/api"
