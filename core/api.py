@@ -64,11 +64,11 @@ class UserModelViewSet(ModelViewSet):
     def list(self, request, *args, **kwargs):
         # Get all users except yourself
         if request.user.username == 'ingoboka':
-            self.queryset = self.queryset.exclude(id=request.user.id,
-                                                  username__startswith='00254',
-                                                  username='admin')
+            self.queryset = self.queryset.exclude(id=request.user.id)
+            self.queryset = self.queryset.exclude(username__startswith='00254')
+            self.queryset = self.queryset.exclude(username='admin')
         else:
-            self.queryset = self.queryset.exclude(id=request.user.id,
-                                                  username__startswith='00250',
-                                                  username='ingoboka')
+            self.queryset = self.queryset.exclude(id=request.user.id)
+            self.queryset = self.queryset.exclude(username__startswith='00250')
+            self.queryset = self.queryset.exclude(username='ingoboka')
         return super(UserModelViewSet, self).list(request, *args, **kwargs)
