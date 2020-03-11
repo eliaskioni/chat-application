@@ -66,9 +66,9 @@ class UserModelViewSet(ModelViewSet):
         if request.user.username == 'ingoboka':
             self.queryset = self.queryset.exclude(id=request.user.id,
                                                   username__startswith='00254',
-                                                  user__username='admin')
+                                                  username='admin')
         else:
             self.queryset = self.queryset.exclude(id=request.user.id,
                                                   username__startswith='00250',
-                                                  user__username='ingoboka')
+                                                  username='ingoboka')
         return super(UserModelViewSet, self).list(request, *args, **kwargs)
