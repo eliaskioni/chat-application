@@ -46,7 +46,7 @@ class MessageModelSerializer(ModelSerializer):
                            body=validated_data['body'],
                            user=user)
         msg.save()
-        if recipient.username != 'admin':
+        if recipient.username not in ['admin', 'ingoboka']:
             send_sms_to_partner(recipient.username, msg.body)
         return msg
 
