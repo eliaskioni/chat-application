@@ -107,6 +107,7 @@ $(document).ready(function () {
     });
 
     socket.onmessage = function (e) {
+        updateUserList()
         getMessageById(e.data);
     };
 });
