@@ -47,10 +47,15 @@ class MessageModelSerializer(ModelSerializer):
                            body=validated_data['body'],
                            user=user)
         msg.save()
-        user.last_login = timezone.now()
-        user.save(update_fields=['last_login'])
+
         if recipient.username not in ['admin', 'ingoboka']:
             send_sms_to_partner(recipient.username, msg.body)
+            recipient.last_login = timezone.now()
+            recipient.save(update_fields=['last_login'])
+        if recipient.username in ['admin', 'ingoboka']:
+            user.last_login = timezone.now()
+            user.save(update_fields=['last_login'])
+
         return msg
 
     class Meta:
