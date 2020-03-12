@@ -2,6 +2,7 @@ import uuid
 
 from django.contrib.auth.models import User
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 from core.models import MessageModel
 from rest_framework.serializers import ModelSerializer, CharField
 
@@ -46,6 +47,8 @@ class MessageModelSerializer(ModelSerializer):
                            body=validated_data['body'],
                            user=user)
         msg.save()
+        user.last_login = timezone.now()
+        user.save(update_fields=['last_login'])
         if recipient.username not in ['admin', 'ingoboka']:
             send_sms_to_partner(recipient.username, msg.body)
         return msg

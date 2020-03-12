@@ -56,7 +56,7 @@ class MessageModelViewSet(ModelViewSet):
 
 
 class UserModelViewSet(ModelViewSet):
-    queryset = User.objects.all()
+    queryset = User.objects.all().order_by('-last_login')
     serializer_class = UserModelSerializer
     allowed_methods = ('GET', 'HEAD', 'OPTIONS', 'POST')
     pagination_class = None  # Get all user
